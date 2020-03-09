@@ -9,21 +9,12 @@
     "env": {
         "node": true
     },
-    "ignorePatterns": ["node_modules/", "*.d.ts"],
+    "ignorePatterns": ["node_modules/", "dist/", "*.d.ts"],
     "extends": [
         "eslint:recommended",
-        "plugin:prettier/recommended",
         "plugin:vue/base"
     ],
     "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-                "semi": false,
-                "tabWidth": 4,
-                "trailingComma": "es5"
-            }
-        ],
         "no-unused-vars": "off"
     }
 }
