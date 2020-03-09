@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator"
+import { Component, Vue } from "vue-property-decorator"
 import Startup from "./screens/Startup.vue"
 import Game from "./screens/Game.vue"
 import Imprint from "./screens/Imprint.vue"

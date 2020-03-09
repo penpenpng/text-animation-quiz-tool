@@ -7,7 +7,7 @@ div
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator"
+import { Component, Vue } from "vue-property-decorator"
 import Number from "./game/Number.vue"
 import Countdown from "./game/Countdown.vue"
 import Quiz from "./game/Quiz.vue"
