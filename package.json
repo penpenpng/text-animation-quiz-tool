@@ -1,0 +1,50 @@
+{
+  "name": "text-vq-presenter",
+  "version": "1.0.0",
+  "description": "presents text visual quiz",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "scripts": {
+    "debug": "webpack-dev-server --inline --hot --open"
+  },
+  "author": "penpenpng",
+  "dependencies": {
+    "csv-parse": "^4.8.8",
+    "encoding-japanese": "^1.0.30",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@types/encoding-japanese": "^1.0.15",
+    "@types/webpack-env": "^1.15.0",
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-vue": "^6.1.2",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "prettier": "^1.19.1",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
+    "pug-plain-loader": "^1.0.0",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-loader": "^15.8.3",
+    "vue-property-decorator": "^8.3.0",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  }
+}
