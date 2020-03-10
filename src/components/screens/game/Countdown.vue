@@ -1,5 +1,5 @@
 <template lang="pug">
-div count: {{ count }}
+.centering-container {{ count }}
 </template>
 
 <script lang="ts">
@@ -21,4 +21,4 @@ export default class Countdown extends Vue {
 }
 </script>
 
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus" src="@/assets/styles/common.stylus"></style>

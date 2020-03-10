@@ -1,8 +1,8 @@
 <template lang="pug">
 #app
     Startup(v-if="appState.appPhase === 'startup'")
-    Game(v-if="appState.appPhase === 'game'")
-    Imprint(v-if="appState.appPhase === 'imprint'")
+    Game.fixed(v-if="appState.appPhase === 'game'")
+    Imprint.fixed(v-if="appState.appPhase === 'imprint'")
 </template>
 
 <script lang="ts">
@@ -21,7 +21,7 @@ export default class App extends Vue {
                 case "Enter":
                     this.appState.goNextStep()
                     break
-                case "Space":
+                case " ":
                     if (ev.shiftKey)
                         this.appState.goPrevQuiz()
                     else
@@ -39,14 +39,13 @@ export default class App extends Vue {
 
 <style scoped lang="stylus">
 #app
-    width 100vw
-    height 100vh
     margin 0
     padding 0
     box-sizing border-box
 
     & > *
-        width 100%
-        height 100%
         margin 0
+
+    & > .fixed
+        height 100vh
 </style>

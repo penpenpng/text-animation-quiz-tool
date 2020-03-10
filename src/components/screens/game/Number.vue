@@ -1,5 +1,6 @@
 <template lang="pug">
-div Q. {{ appState.quizIndex + 1 }}
+.centering-container
+    div Q. {{ appState.quizIndex + 1 }}
 </template>
 
 <script lang="ts">
@@ -9,4 +10,4 @@ import { Component, Vue } from "vue-property-decorator"
 export default class Number extends Vue {}
 </script>
 
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus" src="@/assets/styles/common.stylus"></style>

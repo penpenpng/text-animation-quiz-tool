@@ -29,7 +29,7 @@ export default class AppState {
     }
 
     startGame() {
-        if (!this.canStartGame()) throw "Couldn't start game"
+        if (!this.canStartGame()) throw "Invalid Operation"
 
         this.appPhase = "game"
         this.gamePhase = "number"

@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+#game
     Number(v-if="appState.gamePhase === 'number'")
     Countdown(v-if="appState.gamePhase === 'countdown'")
     Quiz(v-if="appState.gamePhase === 'quiz' || appState.gamePhase === 'exposure'")
@@ -19,4 +19,9 @@ import Answer from "./game/Answer.vue"
 export default class Game extends Vue {}
 </script>
 
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus">
+#game > *
+    width 100%
+    height 100%
+    margin 0
+</style>
