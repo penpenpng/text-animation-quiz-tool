@@ -1,5 +1,9 @@
 <template lang="pug">
 #config
+    label(for="quiz-number-font") 企画のタイトル
+    input#quiz-number-font(v-model="appState.config.title")
+    span.annotation
+
     label(for="quiz-number-font") 問題番号のフォント
     input#quiz-number-font(v-model="appState.config.quizNumberFont")
     span.annotation 空欄の場合はブラウザのデフォルトフォント
@@ -7,6 +11,10 @@
     label(for="quiz-body-font") 問題本文のフォント
     input#quiz-body-font(v-model="appState.config.quizBodyFont")
     span.annotation 空欄の場合はブラウザのデフォルトフォント
+
+    label(for="quiz-number-font-size") 問題番号のフォントサイズ
+    input#quiz-body-number-size(type="number" step="0.1" v-model="appState.config.quizNumberFontSize")
+    span.annotation デフォルトのフォントサイズを 1.0 とする相対値
 
     label(for="quiz-body-font-size") 問題本文のフォントサイズ
     input#quiz-body-font-size(type="number" step="0.1" v-model="appState.config.quizBodyFontSize")

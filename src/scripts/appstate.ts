@@ -2,8 +2,10 @@ import sampleQuiz from "./sample-quiz"
 import { clear, push } from "./arrayutils"
 
 class AppConfig {
+    title: string = "文字ビジュアルクイズ"
     quizNumberFont: string = ""
     quizBodyFont: string = ""
+    quizNumberFontSize: number = 1
     quizBodyFontSize: number = 1
     showMouseCursor: boolean = true
 }
