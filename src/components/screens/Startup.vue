@@ -11,7 +11,7 @@ div
                 .option: Dropbox
                 #or または
                 .option: Button(@click="loadSamples") サンプル問題を読み込む
-            Button(:disable="appState.quizzes.length <= 0") 読み込んだ問題を確認する
+            Button(@click="showInspectorModal" :disable="appState.quizzes.length <= 0") 読み込んだ問題を確認する
         // --------------------------------------------------------------------
         .step-header
             span.step-number 2
@@ -21,11 +21,14 @@ div
         // --------------------------------------------------------------------
         hr
         section.step
-            Button#start-game-button(@click="startGame" :disable="!appState.canStartGame()") クイズを始める
-            .help #[i.far.fa-question-circle] 出題画面の操作方法
+            Button#start-game-button(@click="startGame" :disable="!appState.canStartGame()") 出題画面へ
+            .help(@click="showHelpModal") #[i.far.fa-question-circle] 出題画面の操作方法
     #footer
-        a(target="_blank" rel="noopener" :href="url" ) Github
+        a(target="_blank" rel="noopener" :href="repositoryUrl" ) Github
         a(target="_blank" rel="noopener" href="https://twitter.com/penpen_png") Twitter
+    
+    Modal(ref="inspectorModal") inspector
+    Modal(ref="helpModal") help
 </template>
 
 <script lang="ts">
@@ -34,12 +37,18 @@ import { Component, Vue } from "vue-property-decorator"
 import Dropbox from "./startup/Dropbox.vue"
 import Config from "./startup/Config.vue"
 import Button from "@/components/ui/Button.vue"
+import Modal from "@/components/ui/Modal.vue"
 
 @Component({
-    components: { Dropbox, Config, Button },
+    components: { Dropbox, Config, Button, Modal },
 })
 export default class Startup extends Vue {
-    readonly url: string = packageJson.repository.url
+    readonly repositoryUrl: string = packageJson.repository.url
+
+    readonly $refs!: {
+        inspectorModal: Modal,
+        helpModal: Modal,
+    }
 
     startGame() {
         this.appState.startGame()
@@ -47,6 +56,14 @@ export default class Startup extends Vue {
 
     loadSamples() {
         this.appState.loadSampleQuiz()
+    }
+
+    showInspectorModal() {
+        this.$refs.inspectorModal.show()
+    }
+
+    showHelpModal() {
+        this.$refs.helpModal.show()
     }
 }
 </script>

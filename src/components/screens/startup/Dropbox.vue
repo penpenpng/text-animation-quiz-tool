@@ -1,15 +1,34 @@
 <template lang="pug">
 .dropbox
     .dropbox-label ここに CSV をドラッグアンドドロップ
-    .help #[i.far.fa-question-circle] CSV のフォーマット
-    .help #[i.far.fa-question-circle] CSV のサンプル
+    .help(@click="showCsvFormatHelpModal") #[i.far.fa-question-circle] CSV のフォーマット
+    .help(@click="showCsvSampleHelpModal") #[i.far.fa-question-circle] CSV のサンプル
+
+    Modal(ref="csvFormatHelpModal") csv format
+    Modal(ref="csvSampleHelpModal") csv sample
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
+import Modal from "@/components/ui/Modal.vue"
 
-@Component
-export default class Dropbox extends Vue {}
+@Component({
+    components: { Modal },
+})
+export default class Dropbox extends Vue {
+    readonly $refs!: {
+        csvFormatHelpModal: Modal,
+        csvSampleHelpModal: Modal,
+    }
+
+    showCsvFormatHelpModal() {
+        this.$refs.csvFormatHelpModal.show()
+    }
+
+    showCsvSampleHelpModal() {
+        this.$refs.csvSampleHelpModal.show()
+    }
+}
 </script>
 
 <style scoped lang="stylus" src="@/assets/styles/common.stylus"></style>
