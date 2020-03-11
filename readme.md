@@ -1,1 +1,1 @@
-# Text VQ Presenter (WIP)
+# TAQT: Text Animation Quiz Tool (WIP)

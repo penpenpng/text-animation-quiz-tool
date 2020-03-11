@@ -1,10 +1,10 @@
 {
-  "name": "text-vq-presenter",
+  "name": "text-animation-quiz-tool",
   "version": "1.0.0",
-  "description": "presents text visual quiz",
+  "description": "presents text animation quiz",
   "repository": {
     "type": "git",
-    "url": "https://github.com/penpenpng/text-vq-presenter"
+    "url": "https://github.com/penpenpng/text-animation-quiz-tool"
   },
   "license": "MIT",
   "scripts": {

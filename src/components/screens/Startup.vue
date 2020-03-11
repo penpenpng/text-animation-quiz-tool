@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-    h1#header Text VQ Presenter
+    h1#header TAQT: Text Animation Quiz Tool
     #body
         // --------------------------------------------------------------------
         .step-header
