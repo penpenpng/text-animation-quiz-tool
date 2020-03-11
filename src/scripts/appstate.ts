@@ -4,6 +4,7 @@ import { clear, push } from "./arrayutils"
 class AppConfig {
     quizNumberFont: string = ""
     quizBodyFont: string = ""
+    quizBodyFontSize: number = 1
     showMouseCursor: boolean = true
 }
 

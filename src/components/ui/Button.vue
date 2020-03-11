@@ -24,6 +24,7 @@ export default class Button extends Vue {
     user-select none
     color white
     box-shadow 1px 1px 4px gray
+    font-weight bold
 
     &:not(.disable)
         cursor pointer
