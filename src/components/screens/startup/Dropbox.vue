@@ -1,9 +1,8 @@
 <template lang="pug">
 .dropbox
-    span.dropbox-label ここに CSV をドラッグアンドドロップ
-    ul
-        li: a(href="#") [ヘルプ] CSV のフォーマット
-        li: a(href="#") [ヘルプ] CSV のサンプル
+    .dropbox-label ここに CSV をドラッグアンドドロップ
+    .help #[i.far.fa-question-circle] CSV のフォーマット
+    .help #[i.far.fa-question-circle] CSV のサンプル
 </template>
 
 <script lang="ts">
@@ -13,16 +12,15 @@ import { Component, Vue } from "vue-property-decorator"
 export default class Dropbox extends Vue {}
 </script>
 
+<style scoped lang="stylus" src="@/assets/styles/common.stylus"></style>
 <style scoped lang="stylus">
 .dropbox
     background-color aliceblue
     border solid 0.5px lightgray
     padding 2em
     
-    span.dropbox-label
+    .dropbox-label
         color gray
         font-weight bold
-
-    ul
-        margin-bottom 0
+        margin-bottom 0.5em
 </style>

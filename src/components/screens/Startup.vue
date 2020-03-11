@@ -22,7 +22,7 @@ div
         hr
         section.step
             Button#start-game-button(@click="startGame" :disable="!appState.canStartGame()") クイズを始める
-            a(href="#") [ヘルプ] 出題画面の操作方法
+            .help #[i.far.fa-question-circle] 出題画面の操作方法
     #footer
         a(target="_blank" rel="noopener" :href="url" ) Github
         a(target="_blank" rel="noopener" href="https://twitter.com/penpen_png") Twitter
@@ -53,6 +53,7 @@ export default class Startup extends Vue {
 }
 </script>
 
+<style scoped lang="stylus" src="@/assets/styles/common.stylus"></style>
 <style scoped lang="stylus">
 #header
     margin 0

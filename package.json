@@ -12,6 +12,7 @@
   },
   "author": "penpenpng",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "csv-parse": "^4.8.8",
     "encoding-japanese": "^1.0.30",
     "vue": "^2.6.11"
