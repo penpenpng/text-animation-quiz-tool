@@ -1,7 +1,7 @@
 <template lang="pug">
 #config
-    label(for="quiz-number-font") 企画のタイトル
-    input#quiz-number-font(v-model="appState.config.title")
+    label(for="title") 企画のタイトル
+    input#title(v-model="appState.config.title")
     span.annotation
 
     label(for="quiz-number-font") 問題番号のフォント
