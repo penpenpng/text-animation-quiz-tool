@@ -42,12 +42,10 @@ export default class Startup extends Vue {
     readonly url: string = packageJson.repository.url
 
     startGame() {
-        console.log("start game")
         this.appState.startGame()
     }
 
     loadSamples() {
-        console.log("load samples")
         this.appState.loadSampleQuiz()
     }
 }
