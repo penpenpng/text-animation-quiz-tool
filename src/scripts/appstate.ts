@@ -1,5 +1,6 @@
 import sampleQuiz from "./sample-quiz"
 import { clear, push } from "./arrayutils"
+import { ThrowInvalidOperationError, ThrowDirtyStateError, ThrowNotImplementedError } from "@/scripts/errors"
 
 class AppConfig {
     title: string = "文字ビジュアルクイズ"
@@ -13,8 +14,8 @@ class AppConfig {
 export default class AppState {
     config: AppConfig = new AppConfig()
     quizzes: Array<Quiz> = []
-    appPhase: AppPhase = "startup"
-    gamePhase: GamePhase = null
+    appScene: AppScene = "startup"
+    gameScene: GameScene = null
     quizIndex: number | null = null
 
     canStartGame(): boolean {
@@ -22,7 +23,9 @@ export default class AppState {
     }
 
     getCurrentQuiz(): Quiz {
-        if (this.quizIndex === null) throw "Invalid Operation"
+        if (this.quizIndex === null)
+            ThrowInvalidOperationError()
+        
         return this.quizzes[this.quizIndex]
     }
 
@@ -32,78 +35,98 @@ export default class AppState {
     }
 
     startGame() {
-        if (!this.canStartGame()) throw "Invalid Operation"
+        if (!this.canStartGame())
+            ThrowInvalidOperationError()
 
-        this.appPhase = "game"
-        this.gamePhase = "number"
-        this.quizIndex = 0
+        this.appScene = "title"
+        this.gameScene = null
+        this.quizIndex = null
     }
 
     exitGame() {
-        this.appPhase = "startup"
-        this.gamePhase = null
+        this.appScene = "startup"
+        this.gameScene = null
         this.quizIndex = null
     }
     
     goNextStep() {
-        if (this.appPhase === "startup") throw "Invalid Operation"
+        if (this.appScene === "startup")
+            ThrowInvalidOperationError()
 
-        if (this.appPhase === "game") {
-            switch (this.gamePhase) {
+        if (this.appScene === "game") {
+            switch (this.gameScene) {
                 case "number":
-                    this.gamePhase = "countdown"
+                    this.gameScene = "countdown"
                     break
                 case "countdown":
-                    this.gamePhase = "quiz"
+                    this.gameScene = "quiz"
                     break
                 case "quiz":
-                    this.gamePhase = "exposure"
+                    this.gameScene = "exposure"
                     break
                 case "exposure":
-                    this.gamePhase = "answer"
+                    this.gameScene = "answer"
                     break
                 case "answer":
                     this.goNextQuiz()
                     break
             }
-        } else if (this.appPhase === "imprint") {
-            this.exitGame()
+        } else {
+            this.goNextQuiz()
         }
     }
 
     goNextQuiz() {
-        if (this.appPhase === "startup") throw "Invalid Operation"
+        if (this.appScene === "startup")
+            ThrowInvalidOperationError()
 
-        if (this.appPhase === "game") {
-            if (this.quizIndex === null) throw "Dirty State"
+        if (this.appScene === "game") {
+            if (this.quizIndex === null)
+                ThrowDirtyStateError()
             
             this.quizIndex++
             if (this.quizIndex < this.quizzes.length) {
-                this.gamePhase = "number"
+                this.gameScene = "number"
             } else {
                 this.quizIndex = null
-                this.appPhase = "imprint"
-                this.gamePhase = null
+                this.appScene = "imprint"
+                this.gameScene = null
             }
-        } else if (this.appPhase === "imprint") {
+        } else if (this.appScene === "title") {
+            this.appScene = "game"
+            this.gameScene = "number"
+            this.quizIndex = 0
+        } else if (this.appScene === "imprint") {
             this.exitGame()
+        } else {
+            ThrowNotImplementedError()
         }
     }
 
     goPrevQuiz() {
-        if (this.appPhase === "startup") throw "Invalid Operation"
+        if (this.appScene === "startup")
+            ThrowInvalidOperationError()
 
-        this.gamePhase = "number"
-        
-        if (this.appPhase === "game") {
-            if (this.quizIndex === null) throw "Dirty State"
+        if (this.appScene === "game") {
+            if (this.quizIndex === null)
+                ThrowDirtyStateError()
             
             if (0 < this.quizIndex) {
                 this.quizIndex--
-            }
-        } else if (this.appPhase === "imprint") {
-            this.appPhase = "game"
+                this.gameScene = "number"
+            } else {
+                this.appScene = "title"
+                this.quizIndex = null
+                this.gameScene = null
+            } 
+        } else if (this.appScene === "title") {
+            this.exitGame()
+        } else if (this.appScene === "imprint") {
+            this.appScene = "game"
+            this.gameScene = "number"
             this.quizIndex = this.quizzes.length - 1
+        } else {
+            ThrowNotImplementedError()
         }
     }
 }

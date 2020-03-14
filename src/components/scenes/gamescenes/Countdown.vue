@@ -21,4 +21,10 @@ export default class Countdown extends Vue {
 }
 </script>
 
-<style scoped lang="stylus" src="@/assets/styles/common.stylus"></style>
+<style scoped lang="stylus">
+.centering-container
+    display: flex
+    align-items: center
+    justify-content: center
+</style>
+

@@ -1,8 +1,3 @@
-.centering-container
-    display: flex
-    align-items: center
-    justify-content: center
-
 .help
     width max-content
     color darkgreen

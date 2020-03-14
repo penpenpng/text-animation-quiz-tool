@@ -1,5 +1,5 @@
 <template lang="pug">
-.button.centering-container(@click="onClick" :class="{disable}")
+.button(@click="onClick" :class="{disable}")
     slot
 </template>
 

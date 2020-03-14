@@ -10,4 +10,10 @@ import { Component, Vue } from "vue-property-decorator"
 export default class Number extends Vue {}
 </script>
 
-<style scoped lang="stylus" src="@/assets/styles/common.stylus"></style>
+<style scoped lang="stylus">
+.centering-container
+    display: flex
+    align-items: center
+    justify-content: center
+</style>
+

@@ -1,5 +1,5 @@
 <template lang="pug">
-div imprint
+#imprint imprint
 </template>
 
 <script lang="ts">
@@ -9,4 +9,7 @@ import { Component, Vue } from "vue-property-decorator"
 export default class Imprint extends Vue {}
 </script>
 
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus">
+#imprint
+    height 100vh
+</style>

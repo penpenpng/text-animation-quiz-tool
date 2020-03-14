@@ -1,18 +1,18 @@
 <template lang="pug">
 #app
-    Startup(v-if="appState.appPhase === 'startup'")
-    Game.fixed(v-if="appState.appPhase === 'game'")
-    Imprint.fixed(v-if="appState.appPhase === 'imprint'")
+    div(:is="scene()")
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import Startup from "./screens/Startup.vue"
-import Game from "./screens/Game.vue"
-import Imprint from "./screens/Imprint.vue"
+import Startup from "./scenes/Startup.vue"
+import Title from "./scenes/Title.vue"
+import Game from "./scenes/Game.vue"
+import Imprint from "./scenes/Imprint.vue"
+import { capitalize } from "@/scripts/stringutils"
 
 @Component({
-    components: { Startup, Game, Imprint },
+    components: { Startup, Title, Game, Imprint},
 })
 export default class App extends Vue {
     created() {
@@ -20,6 +20,7 @@ export default class App extends Vue {
             switch (ev.key) {
                 case "Enter":
                     this.appState.goNextStep()
+                    "".toUpperCase
                     break
                 case " ":
                     if (ev.shiftKey)
@@ -34,6 +35,10 @@ export default class App extends Vue {
             }
         })
     }
+
+    scene(): string {
+        return capitalize(this.appState.appScene)
+    }
 }
 </script>
 
@@ -45,7 +50,4 @@ export default class App extends Vue {
 
     & > *
         margin 0
-
-    & > .fixed
-        height 100vh
 </style>

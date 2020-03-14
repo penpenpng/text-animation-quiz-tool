@@ -9,8 +9,8 @@ declare module "vue/types/vue" {
 
 declare global {
     type QuizFormat = "anagram"
-    type AppPhase = "startup" | "game" | "imprint"
-    type GamePhase = "number" | "countdown" | "quiz" | "exposure" | "answer" | null
+    type AppScene = "startup" | "title" | "game" | "imprint"
+    type GameScene = "number" | "countdown" | "quiz" | "exposure" | "answer" | null
     
     interface Quiz {
         format: QuizFormat
