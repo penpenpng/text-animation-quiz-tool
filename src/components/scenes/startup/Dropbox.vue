@@ -1,8 +1,8 @@
 <template lang="pug">
 .dropbox
     .dropbox-label ここに CSV をドラッグアンドドロップ
-    .help(@click="showCsvFormatHelpModal") #[i.far.fa-question-circle] CSV のフォーマット
-    .help(@click="showCsvSampleHelpModal") #[i.far.fa-question-circle] CSV のサンプル
+    HelpButton(@click="showCsvFormatHelpModal") CSV のフォーマット
+    HelpButton(@click="showCsvSampleHelpModal") CSV のサンプル
 
     Modal(ref="csvFormatHelpModal") csv format
     Modal(ref="csvSampleHelpModal") csv sample
@@ -10,10 +10,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
+import HelpButton from "@/components/ui/HelpButton.vue"
 import Modal from "@/components/ui/Modal.vue"
 
 @Component({
-    components: { Modal },
+    components: { HelpButton, Modal },
 })
 export default class Dropbox extends Vue {
     readonly $refs!: {
@@ -31,7 +32,6 @@ export default class Dropbox extends Vue {
 }
 </script>
 
-<style scoped lang="stylus" src="@/assets/styles/common.stylus"></style>
 <style scoped lang="stylus">
 .dropbox
     background-color aliceblue

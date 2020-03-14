@@ -22,7 +22,7 @@ div
         hr
         section.step
             Button#start-game-button(@click="startGame" :disable="!appState.canStartGame()") 出題画面へ
-            .help(@click="showHelpModal") #[i.far.fa-question-circle] 出題画面の操作方法
+            HelpButton(@click="showHelpModal") 出題画面の操作方法
     #footer
         a(target="_blank" rel="noopener" :href="repositoryUrl" ) Github
         a(target="_blank" rel="noopener" href="https://twitter.com/penpen_png") Twitter
@@ -37,10 +37,11 @@ import { Component, Vue } from "vue-property-decorator"
 import Dropbox from "./startup/Dropbox.vue"
 import Config from "./startup/Config.vue"
 import Button from "@/components/ui/Button.vue"
+import HelpButton from "@/components/ui/HelpButton.vue"
 import Modal from "@/components/ui/Modal.vue"
 
 @Component({
-    components: { Dropbox, Config, Button, Modal },
+    components: { Dropbox, Config, Button, HelpButton, Modal },
 })
 export default class Startup extends Vue {
     readonly repositoryUrl: string = packageJson.repository.url
@@ -68,7 +69,6 @@ export default class Startup extends Vue {
 }
 </script>
 
-<style scoped lang="stylus" src="@/assets/styles/common.stylus"></style>
 <style scoped lang="stylus">
 #header
     margin 0
