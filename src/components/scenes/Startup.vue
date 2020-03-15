@@ -21,7 +21,7 @@ div
         // --------------------------------------------------------------------
         hr
         section.step
-            Button#start-game-button(@click="startGame" :disable="!appState.canStartGame()") 出題画面へ
+            Button#start-game-button(@click="startGame" :disable="!appState.canStartGame") 出題画面へ
             HelpButton(@click="showHelpModal") 出題画面の操作方法
     #footer
         a(target="_blank" rel="noopener" :href="repositoryUrl" ) Github
@@ -34,6 +34,8 @@ div
 <script lang="ts">
 import packageJson from "@/../package.json"
 import { Component, Vue } from "vue-property-decorator"
+import { mixins } from "vue-class-component"
+import { AppStateMixin } from "@/scripts/mixins"
 import Dropbox from "./startup/Dropbox.vue"
 import Config from "./startup/Config.vue"
 import Button from "@/components/ui/Button.vue"
@@ -43,7 +45,7 @@ import Modal from "@/components/ui/Modal.vue"
 @Component({
     components: { Dropbox, Config, Button, HelpButton, Modal },
 })
-export default class Startup extends Vue {
+export default class Startup extends mixins(AppStateMixin) {
     readonly repositoryUrl: string = packageJson.repository.url
 
     readonly $refs!: {

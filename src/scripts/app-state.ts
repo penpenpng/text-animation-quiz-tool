@@ -1,6 +1,7 @@
 import sampleQuiz from "./sample-quiz"
-import { clear, push } from "./arrayutils"
+import { clear, push } from "./array-utils"
 import { ThrowInvalidOperationError, ThrowDirtyStateError, ThrowNotImplementedError } from "@/scripts/errors"
+
 
 class AppConfig {
     title: string = "文字ビジュアルクイズ"
@@ -12,17 +13,26 @@ class AppConfig {
 }
 
 export default class AppState {
+    private static instance?: AppState
+    private constructor() { }
+    
+    static getInstance(): AppState {
+        if (!AppState.instance)
+            AppState.instance = new AppState()
+        return AppState.instance   
+    }
+
     config: AppConfig = new AppConfig()
     quizzes: Array<Quiz> = []
     appScene: AppScene = "startup"
     gameScene: GameScene = null
     quizIndex: number | null = null
 
-    canStartGame(): boolean {
+    get canStartGame(): boolean {
         return this.quizzes.length > 0
     }
 
-    getCurrentQuiz(): Quiz {
+    get currentQuiz(): Quiz {
         if (this.quizIndex === null)
             ThrowInvalidOperationError()
         
@@ -35,7 +45,7 @@ export default class AppState {
     }
 
     startGame() {
-        if (!this.canStartGame())
+        if (!this.canStartGame)
             ThrowInvalidOperationError()
 
         this.appScene = "title"

@@ -10,13 +10,15 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
+import { mixins } from "vue-class-component"
+import { AppStateMixin } from "@/scripts/mixins"
 import HelpButton from "@/components/ui/HelpButton.vue"
 import Modal from "@/components/ui/Modal.vue"
 
 @Component({
     components: { HelpButton, Modal },
 })
-export default class Dropbox extends Vue {
+export default class Dropbox extends mixins(AppStateMixin) {
     readonly $refs!: {
         csvFormatHelpModal: Modal,
         csvSampleHelpModal: Modal,

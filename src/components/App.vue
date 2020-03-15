@@ -5,22 +5,26 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
+import { mixins } from "vue-class-component"
+import { AppStateMixin } from "@/scripts/mixins"
 import Startup from "./scenes/Startup.vue"
 import Title from "./scenes/Title.vue"
 import Game from "./scenes/Game.vue"
 import Imprint from "./scenes/Imprint.vue"
-import { capitalize } from "@/scripts/stringutils"
+import { capitalize } from "@/scripts/string-utils"
 
 @Component({
     components: { Startup, Title, Game, Imprint},
 })
-export default class App extends Vue {
+export default class App extends mixins(AppStateMixin) {
     created() {
         document.addEventListener("keydown", ev => {
+            if (this.appState.appScene === "startup")
+                return
+
             switch (ev.key) {
                 case "Enter":
                     this.appState.goNextStep()
-                    "".toUpperCase
                     break
                 case " ":
                     if (ev.shiftKey)

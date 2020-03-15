@@ -1,13 +1,15 @@
 <template lang="pug">
 .centering-container
-    div A. {{ appState.getCurrentQuiz().answer }}
+    div A. {{ appState.currentQuiz.answer }}
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
+import { mixins } from "vue-class-component"
+import { AppStateMixin } from "@/scripts/mixins"
 
 @Component
-export default class Answer extends Vue {}
+export default class Answer extends mixins(AppStateMixin) {}
 </script>
 
 <style scoped lang="stylus">

@@ -4,9 +4,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
+import { mixins } from "vue-class-component"
+import { AppStateMixin } from "@/scripts/mixins"
 
 @Component
-export default class Countdown extends Vue {
+export default class Countdown extends mixins(AppStateMixin) {
     count: number = 3
     
     created() {
