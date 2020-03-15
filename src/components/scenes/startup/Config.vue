@@ -6,19 +6,27 @@
 
     label(for="quiz-number-font") 問題番号のフォント
     input#quiz-number-font(v-model="appState.config.quizNumberFont")
-    span.annotation 空欄の場合はブラウザのデフォルトフォント
+    span.annotation 空欄の場合はブラウザのデフォルト等幅フォント
     
     label(for="quiz-body-font") 問題本文のフォント
     input#quiz-body-font(v-model="appState.config.quizBodyFont")
-    span.annotation 空欄の場合はブラウザのデフォルトフォント
+    span.annotation 空欄の場合はブラウザのデフォルト等幅フォント
+
+    label(for="quiz-answer-font") 答えのフォント
+    input#quiz-answer-font(v-model="appState.config.quizAnswerFont")
+    span.annotation 空欄の場合はブラウザのデフォルト等幅フォント
 
     label(for="quiz-number-font-size") 問題番号のフォントサイズ
     input#quiz-body-number-size(type="number" step="0.1" v-model="appState.config.quizNumberFontSize")
-    span.annotation デフォルトのフォントサイズを 1.0 とする相対値
+    span.annotation この説明文のフォントサイズを 1.0 とする相対値
 
     label(for="quiz-body-font-size") 問題本文のフォントサイズ
     input#quiz-body-font-size(type="number" step="0.1" v-model="appState.config.quizBodyFontSize")
-    span.annotation デフォルトのフォントサイズを 1.0 とする相対値
+    span.annotation この説明文のフォントサイズを 1.0 とする相対値
+
+    label(for="quiz-answer-font-size") 答えのフォントサイズ
+    input#quiz-answer-font-size(type="number" step="0.1" v-model="appState.config.quizAnswerFontSize")
+    span.annotation この説明文のフォントサイズを 1.0 とする相対値
 
     label(for="show-mouse-cursor") マウスカーソルを表示する
     input#show-mouse-cursor(type="checkbox" v-model="appState.config.showMouseCursor")

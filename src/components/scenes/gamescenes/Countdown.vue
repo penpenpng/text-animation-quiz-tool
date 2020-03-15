@@ -1,5 +1,5 @@
 <template lang="pug">
-.centering-container {{ count }}
+.centering-container(:style="styleObject") {{ count }}
 </template>
 
 <script lang="ts">
@@ -27,6 +27,13 @@ export default class Countdown extends mixins(AppStateMixin) {
         if (this.interval) {
             clearInterval(this.interval)
             this.interval = undefined
+        }
+    }
+
+    get styleObject() {
+        return {
+            'font-size': `${this.appState.config.quizNumberFontSize}em`,
+            'font-family': `'${this.appState.config.quizNumberFont}', monospace`,
         }
     }
 }

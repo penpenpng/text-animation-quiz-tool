@@ -7,8 +7,10 @@ class AppConfig {
     title: string = "文字ビジュアルクイズ"
     quizNumberFont: string = ""
     quizBodyFont: string = ""
-    quizNumberFontSize: number = 1
-    quizBodyFontSize: number = 1
+    quizAnswerFont: string = ""
+    quizNumberFontSize: number = 10
+    quizBodyFontSize: number = 5
+    quizAnswerFontSize: number = 8
     showMouseCursor: boolean = true
 }
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-.centering-container Q. {{ appState.quizIndex + 1 }}
+.centering-container(:style="styleObject") Q. {{ appState.quizIndex + 1 }}
 </template>
 
 <script lang="ts">
@@ -8,7 +8,14 @@ import { mixins } from "vue-class-component"
 import { AppStateMixin } from "@/scripts/mixins"
 
 @Component
-export default class Number extends mixins(AppStateMixin) {}
+export default class Number extends mixins(AppStateMixin) {
+    get styleObject() {
+        return {
+            'font-size': `${this.appState.config.quizNumberFontSize}em`,
+            'font-family': `'${this.appState.config.quizNumberFont}', monospace`,
+        }
+    }
+}
 </script>
 
 <style scoped lang="stylus">

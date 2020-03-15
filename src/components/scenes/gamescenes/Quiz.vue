@@ -1,5 +1,5 @@
 <template lang="pug">
-#quiz(@click.stop="onClick"): div(:is="format" ref="quizDisplay")
+#quiz(@click.stop="onClick"): div(ref="quizDisplay" :is="format" :style="styleObject")
 </template>
 
 <script lang="ts">
@@ -19,6 +19,13 @@ export default class Quiz extends mixins(AppStateMixin) {
 
     get format(): string {
         return capitalize(this.appState.currentQuiz.format)
+    }
+
+    get styleObject() {
+        return {
+            'font-size': `${this.appState.config.quizBodyFontSize}em`,
+            'font-family': `'${this.appState.config.quizBodyFont}', monospace`,
+        }
     }
 
     @Watch("appState.gameScene")

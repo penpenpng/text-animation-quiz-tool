@@ -1,5 +1,5 @@
 <template lang="pug">
-#game: div(:is="gameScene")
+#game: div(:is="gameScene" :style="styleObject")
 </template>
 
 <script lang="ts">
@@ -25,6 +25,12 @@ export default class Game extends mixins(AppStateMixin) {
             return "Quiz"
 
         return capitalize(this.appState.gameScene)
+    }
+
+    get styleObject() {
+        return {
+            cursor: this.appState.config.showMouseCursor ? "default" : "none"
+        }
     }
 }
 </script>

@@ -1,5 +1,5 @@
 <template lang="pug">
-#imprint imprint
+#imprint(:style="styleObject") imprint
 </template>
 
 <script lang="ts">
@@ -8,7 +8,13 @@ import { mixins } from "vue-class-component"
 import { AppStateMixin } from "@/scripts/mixins"
 
 @Component
-export default class Imprint extends mixins(AppStateMixin) {}
+export default class Imprint extends mixins(AppStateMixin) {
+    get styleObject() {
+        return {
+            cursor: this.appState.config.showMouseCursor ? "default" : "none"
+        }
+    }
+}
 </script>
 
 <style scoped lang="stylus">
