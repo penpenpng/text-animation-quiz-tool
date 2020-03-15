@@ -16,3 +16,7 @@ export function ThrowInvalidOperationError(v?: any): never {
 export function ThrowNotImplementedError(): never {
     ThrowError("Not Implemented")
 }
+
+export function ThrowInvalidArgumentError(v: any): never {
+    ThrowError("Invalid Argument", v)
+}

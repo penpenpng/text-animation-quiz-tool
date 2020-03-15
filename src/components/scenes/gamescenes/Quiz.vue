@@ -1,5 +1,5 @@
 <template lang="pug">
-div: div(:is="format()")
+#quiz: div(:is="format()")
 </template>
 
 <script lang="ts">
@@ -19,4 +19,9 @@ export default class Quiz extends mixins(AppStateMixin) {
 }
 </script>
 
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus">
+#quiz > div
+    width 100%
+    height 100%
+    margin 0
+</style>

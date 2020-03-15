@@ -23,7 +23,7 @@ export default class AppState {
     }
 
     config: AppConfig = new AppConfig()
-    quizzes: Array<Quiz> = []
+    quizzes: Quiz[] = []
     appScene: AppScene = "startup"
     gameScene: GameScene = null
     quizIndex: number | null = null
