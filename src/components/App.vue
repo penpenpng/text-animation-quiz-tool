@@ -31,6 +31,14 @@ export default class App extends mixins(AppStateMixin) {
                     else
                         this.appState.goNextQuiz()
                     break
+                case "ArrowRight":
+                case "ArrowDown":
+                    this.appState.goNextQuiz()
+                    break
+                case "ArrowLeft":
+                case "ArrowUp":
+                    this.appState.goPrevQuiz()
+                    break
                 case "Escape":
                     this.appState.exitGame()
                     break
