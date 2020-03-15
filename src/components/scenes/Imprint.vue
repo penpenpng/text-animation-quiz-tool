@@ -14,4 +14,7 @@ export default class Imprint extends mixins(AppStateMixin) {}
 <style scoped lang="stylus">
 #imprint
     height 100vh
+    display: flex
+    align-items: center
+    justify-content: center
 </style>

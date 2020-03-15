@@ -1,6 +1,5 @@
 <template lang="pug">
-.centering-container
-    div {{ appState.config.title }}
+#title {{ appState.config.title }}
 </template>
 
 <script lang="ts">
@@ -13,7 +12,8 @@ export default class Title extends mixins(AppStateMixin) {}
 </script>
 
 <style scoped lang="stylus">
-.centering-container
+#title
+    height 100vh
     display: flex
     align-items: center
     justify-content: center

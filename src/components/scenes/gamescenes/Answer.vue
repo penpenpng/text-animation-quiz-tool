@@ -1,6 +1,5 @@
 <template lang="pug">
-.centering-container
-    div A. {{ appState.currentQuiz.answer }}
+.centering-container A. {{ appState.currentQuiz.answer }}
 </template>
 
 <script lang="ts">

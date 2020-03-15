@@ -1,6 +1,5 @@
 <template lang="pug">
-#game
-    div(:is="scene()")
+#game: div(:is="gameScene")
 </template>
 
 <script lang="ts">
@@ -18,7 +17,7 @@ import { ThrowDirtyStateError } from "@/scripts/errors"
     components: { Number, Countdown, Quiz, Answer }
 })
 export default class Game extends mixins(AppStateMixin) {
-    scene() {
+    get gameScene(): string {
         if (this.appState.gameScene === null)
             ThrowDirtyStateError()
 

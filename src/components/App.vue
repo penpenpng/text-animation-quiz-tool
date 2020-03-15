@@ -1,6 +1,5 @@
 <template lang="pug">
-#app
-    div(:is="scene()")
+#app: div(:is="scene")
 </template>
 
 <script lang="ts">
@@ -40,7 +39,7 @@ export default class App extends mixins(AppStateMixin) {
         })
     }
 
-    scene(): string {
+    get scene(): string {
         return capitalize(this.appState.appScene)
     }
 }
