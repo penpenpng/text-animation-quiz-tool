@@ -10,15 +10,24 @@ import { AppStateMixin } from "@/scripts/mixins"
 @Component
 export default class Countdown extends mixins(AppStateMixin) {
     count: number = 3
+    interval?: number
     
     created() {
-        const t = setInterval(() => {
+        this.interval = setInterval(() => {
             this.count--
-            if (this.count <= 0) {
-                clearInterval(t)
+            if (this.count <= 0 && this.interval) {
+                clearInterval(this.interval)
+                this.interval = undefined
                 this.appState.goNextStep()
             }
         }, 1000)    
+    }
+
+    destroyed() {
+        if (this.interval) {
+            clearInterval(this.interval)
+            this.interval = undefined
+        }
     }
 }
 </script>

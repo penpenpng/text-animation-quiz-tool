@@ -1,8 +1,7 @@
 <template lang="pug">
-#anagram(@click="swap")
-    transition-group.chars(name="anagram" tag="div")
-        span.char(v-for="i in charIndice" :key="i")
-            | {{ statement[i] }}
+div: transition-group.chars(name="anagram" tag="div")
+    span.char(v-for="i in charIndice" :key="i")
+        | {{ statement[i] }}
 </template>
 
 <script lang="ts">
@@ -25,6 +24,8 @@ export default class Anagram extends mixins(GameFormatMixin) {
             fisherYateShuffleInPlace(indices)
             return indices
         })()
+
+        this.$on("click", () => this.swap())
 
         this.$on("expose", () => {
             this.charIndice = iota(this.statement.length)
@@ -51,23 +52,19 @@ export default class Anagram extends mixins(GameFormatMixin) {
         
         this.wrongIndice = wrongIndice
 
-        if (this.wrongIndice.length <= 0) this.expose()
+        if (this.wrongIndice.length <= 0)
+            this.expose()
     }
 }
 </script>
 
 <style scoped lang="stylus">
-#anagram
-    display: flex
-    align-items: center
-    justify-content: center
+.chars
+    max-width 80%
 
-    .chars
-        max-width 80%
+.char
+    display inline-block
 
-    .char
-        display inline-block
-
-    .anagram-move
-        transition transform 1s
+.anagram-move
+    transition transform 1s
 </style>
