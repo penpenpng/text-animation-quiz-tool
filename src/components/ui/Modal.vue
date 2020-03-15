@@ -51,7 +51,8 @@ export default class Modal extends Vue {
     align-items stretch
     background-color white
     min-width 50vw
-    min-height 50vh
+    min-height 50vw
+    margin 5vh 5vw
 
     .header
         margin 0

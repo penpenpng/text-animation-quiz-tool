@@ -5,13 +5,17 @@ import { ThrowInvalidOperationError, ThrowDirtyStateError, ThrowNotImplementedEr
 
 class AppConfig {
     title: string = "文字ビジュアルクイズ"
+    showMouseCursor: boolean = true
+    
+    titleFont: string = ""
     quizNumberFont: string = ""
     quizBodyFont: string = ""
     quizAnswerFont: string = ""
+    
+    titleFontSize: number = 8
     quizNumberFontSize: number = 10
     quizBodyFontSize: number = 5
     quizAnswerFontSize: number = 8
-    showMouseCursor: boolean = true
 }
 
 export default class AppState {

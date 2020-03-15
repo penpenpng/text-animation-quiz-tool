@@ -11,7 +11,9 @@ import { AppStateMixin } from "@/scripts/mixins"
 export default class Title extends mixins(AppStateMixin) {
     get styleObject() {
         return {
-            cursor: this.appState.config.showMouseCursor ? "default" : "none"
+            cursor: this.appState.config.showMouseCursor ? "default" : "none",
+            'font-size': `${this.appState.config.titleFontSize}em`,
+            'font-family': `'${this.appState.config.titleFont}', monospace`,
         }
     }
 }

@@ -1,36 +1,40 @@
 <template lang="pug">
 #config
-    label(for="title") 企画のタイトル
-    input#title(v-model="appState.config.title")
-    span.annotation
-
-    label(for="quiz-number-font") 問題番号のフォント
-    input#quiz-number-font(v-model="appState.config.quizNumberFont")
-    span.annotation 空欄の場合はブラウザのデフォルト等幅フォント
+    h2.header 一般
     
-    label(for="quiz-body-font") 問題本文のフォント
-    input#quiz-body-font(v-model="appState.config.quizBodyFont")
-    span.annotation 空欄の場合はブラウザのデフォルト等幅フォント
-
-    label(for="quiz-answer-font") 答えのフォント
-    input#quiz-answer-font(v-model="appState.config.quizAnswerFont")
-    span.annotation 空欄の場合はブラウザのデフォルト等幅フォント
-
-    label(for="quiz-number-font-size") 問題番号のフォントサイズ
-    input#quiz-body-number-size(type="number" step="0.1" v-model="appState.config.quizNumberFontSize")
-    span.annotation この説明文のフォントサイズを 1.0 とする相対値
-
-    label(for="quiz-body-font-size") 問題本文のフォントサイズ
-    input#quiz-body-font-size(type="number" step="0.1" v-model="appState.config.quizBodyFontSize")
-    span.annotation この説明文のフォントサイズを 1.0 とする相対値
-
-    label(for="quiz-answer-font-size") 答えのフォントサイズ
-    input#quiz-answer-font-size(type="number" step="0.1" v-model="appState.config.quizAnswerFontSize")
-    span.annotation この説明文のフォントサイズを 1.0 とする相対値
+    label(for="title") タイトル
+    input#title(v-model="appState.config.title")
 
     label(for="show-mouse-cursor") マウスカーソルを表示する
     input#show-mouse-cursor(type="checkbox" v-model="appState.config.showMouseCursor")
-    span.annotation
+
+    h2.header フォント #[span.annotation 空欄の場合はブラウザのデフォルト等幅フォント]
+    
+    label(for="quiz-title-font") タイトル
+    input#quiz-title-font(v-model="appState.config.titleFont")
+
+    label(for="quiz-number-font") 問題番号
+    input#quiz-number-font(v-model="appState.config.quizNumberFont")
+    
+    label(for="quiz-body-font") 問題本文
+    input#quiz-body-font(v-model="appState.config.quizBodyFont")
+
+    label(for="quiz-answer-font") 答え
+    input#quiz-answer-font(v-model="appState.config.quizAnswerFont")
+
+    h2.header フォントサイズ #[span.annotation この説明文のフォントサイズを 1.0 とする相対値]
+
+    label(for="quiz-title-font-size") タイトル
+    input#quiz-title-font-size(type="number" step="0.1" v-model="appState.config.titleFontSize")
+
+    label(for="quiz-number-font-size") 問題番号
+    input#quiz-body-number-size(type="number" step="0.1" v-model="appState.config.quizNumberFontSize")
+
+    label(for="quiz-body-font-size") 問題本文
+    input#quiz-body-font-size(type="number" step="0.1" v-model="appState.config.quizBodyFontSize")
+
+    label(for="quiz-answer-font-size") 答え
+    input#quiz-answer-font-size(type="number" step="0.1" v-model="appState.config.quizAnswerFontSize")
 </template>
 
 <script lang="ts">
@@ -44,20 +48,32 @@ export default class Config extends mixins(AppStateMixin) {}
 
 <style scoped lang="stylus">
 #config
-    display grid
     padding 1em
-    grid-template-columns repeat(3, max-content)
+    display grid
+    grid-template-columns repeat(2, auto)
     grid-row-gap 0.5em
     grid-column-gap 1em
     align-items center
+    overflow-y scroll
+    max-height 60vh
 
-label
-    justify-self end
+    label
+        justify-self end
 
-label:after
-    content ": "
+    label:after
+        content ": "
+    
+    h2.header
+        display inline-block
+        margin 0
+        font-size 1.2rem
+        grid-column 1 / span 2
 
-span.annotation
-    color gray
-    margin-left 1em
+        &:not(:first-child)
+            margin-top 0.5em
+    
+        .annotation
+            font-size 1rem
+            font-weight normal
+            color gray
 </style>
