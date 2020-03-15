@@ -1,39 +1,28 @@
 <template lang="pug">
-div
+#startup
     h1#header TAQT: Text Animation Quiz Tool
     #body
-        // --------------------------------------------------------------------
-        .step-header
-            span.step-number 1
-            span.step-explanation 問題データを入力してください
-        section.step
-            #step1-options
-                .option: Dropbox
-                #or または
-                .option: Button(@click="loadSamples") サンプル問題を読み込む
-            Button(@click="showInspectorModal" :disable="appState.quizzes.length <= 0") 読み込んだ問題を確認する
-        // --------------------------------------------------------------------
-        .step-header
-            span.step-number 2
-            span.step-explanation [任意] 表示オプションを設定してください
-        section.step
-            Config
-        // --------------------------------------------------------------------
-        hr
-        section.step
-            Button#start-game-button(@click="startGame" :disable="!appState.canStartGame") 出題画面へ
-            HelpButton(@click="showHelpModal") 出題画面の操作方法
+        #loader
+            .option: Dropbox
+            #or または
+            .option: Button(@click="loadSamples") サンプル問題を読み込む
+        Fade: #after-loaded(v-show="appState.canStartGame")
+            Button(@click="showInspectorModal" secondary) 読み込んだ問題を確認する
+            Button(@click="showConfigModal" secondary) 表示設定を変更する
+            Button(@click="startGame") 出題画面へ
+            HelpButton.help(@click="showHelpModal") 出題画面の操作方法
     #footer
         a(target="_blank" rel="noopener" :href="repositoryUrl" ) Github
         a(target="_blank" rel="noopener" href="https://twitter.com/penpen_png") Twitter
     
-    Modal(ref="inspectorModal") inspector
-    Modal(ref="helpModal") help
+    Modal(ref="inspectorModal" title="TITLE") inspector
+    Modal(ref="helpModal" title="TITLE") help
+    Modal(ref="configModal" title="Config"): Config
 </template>
 
 <script lang="ts">
 import packageJson from "@/../package.json"
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Vue, Watch } from "vue-property-decorator"
 import { mixins } from "vue-class-component"
 import { AppStateMixin } from "@/scripts/mixins"
 import Dropbox from "./startup/Dropbox.vue"
@@ -41,17 +30,19 @@ import Config from "./startup/Config.vue"
 import Button from "@/components/ui/Button.vue"
 import HelpButton from "@/components/ui/HelpButton.vue"
 import Modal from "@/components/ui/Modal.vue"
+import Fade from "@/components/ui/Fade.vue"
 
 @Component({
-    components: { Dropbox, Config, Button, HelpButton, Modal },
+    components: { Dropbox, Config, Button, HelpButton, Modal, Fade },
 })
 export default class Startup extends mixins(AppStateMixin) {
     readonly repositoryUrl: string = packageJson.repository.url
-
     readonly $refs!: {
         inspectorModal: Modal,
         helpModal: Modal,
+        configModal: Modal,
     }
+    quizIsLoaded: boolean = false
 
     startGame() {
         this.appState.startGame()
@@ -59,6 +50,10 @@ export default class Startup extends mixins(AppStateMixin) {
 
     loadSamples() {
         this.appState.loadSampleQuiz()
+    }
+
+    showConfigModal() {
+        this.$refs.configModal.show()
     }
 
     showInspectorModal() {
@@ -72,6 +67,12 @@ export default class Startup extends mixins(AppStateMixin) {
 </script>
 
 <style scoped lang="stylus">
+#startup
+    min-height 100vh
+    display flex
+    flex-direction column
+    align-items stretch
+
 #header
     margin 0
     padding 0.5em 1em
@@ -81,48 +82,43 @@ export default class Startup extends mixins(AppStateMixin) {
     box-shadow: 0 0 4px black
 
 #body
-    padding 2em
-
-.step-header
-    span.step-number
-        font-size 2em
-
-        &:after
-            content ". "
-
-    span.step-explanation
-        font-size 1.5em
-
-section.step
     display flex
+    justify-content center
     flex-direction column
-    justify-content center
     align-items center
-    margin-bottom 3em
+    padding 2em
+    flex-grow 1
 
-#step1-options
-    display flex
-    flex-direction row
-    justify-content center
-    align-items stretch
-    margin-bottom 2em
-
-    .option
+    #loader
         display flex
+        flex-direction row
         justify-content center
+        align-items stretch
+        margin-bottom 2em
+
+        .option
+            display flex
+            justify-content center
+            align-items center
+            padding 1em
+
+        #or
+            align-self center
+            margin 3em
+    
+    #after-loaded
+        border-top 0.5px solid
+        padding-top 2em
+        display grid
+        grid-template-columns repeat(3, max-content)
+        grid-row-gap 0.5em
+        grid-column-gap 1.5em
         align-items center
-        padding 1em
+        justify-items center
 
-    #or
-        align-self center
-        margin 3em
-
-hr
-    border-color ghostwhite
-    margin 1em
-
-#start-game-button
-    margin-bottom 2em
+        .help
+            grid-row 2
+            grid-column 3
 
 #footer
     margin 0

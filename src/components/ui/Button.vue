@@ -1,5 +1,5 @@
 <template lang="pug">
-.button(@click="onClick" :class="{disable}")
+.button(@click="onClick" :class="{disable, secondary}")
     slot
 </template>
 
@@ -11,7 +11,10 @@ export default class Button extends Vue {
     @Prop(Boolean)
     readonly disable?: boolean
 
-    onClick() {
+    @Prop(Boolean)
+    readonly secondary?: boolean
+
+onClick() {
         if (!this.disable) this.$emit("click")
     }
 }
@@ -26,7 +29,17 @@ export default class Button extends Vue {
     box-shadow 1px 1px 4px gray
     font-weight bold
 
+    &.secondary
+        &:not(.disable)
+            color dodgerblue
+            background-color white
+        
+        &.disable
+            color white
+            background-color darkgray
+
     &:not(.disable)
+        border 0.5px solid dodgerblue
         cursor pointer
         background-color dodgerblue
 

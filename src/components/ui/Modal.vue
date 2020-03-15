@@ -1,13 +1,24 @@
 <template lang="pug">
-.background(v-if="isVisible" @click.self.stop="close")
-    .modal: slot
+Fade
+    .background(v-if="isVisible" @click.self.stop="close")
+        .modal
+            h1.header {{ title }}
+            div.content: slot
+            Button.footer(@click="close" secondary) OK
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Prop, Vue } from "vue-property-decorator"
+import Button from "@/components/ui/Button.vue"
+import Fade from "@/components/ui/Fade.vue"
 
-@Component
+@Component({
+    components: { Fade, Button }
+})
 export default class Modal extends Vue {
+    @Prop(String)
+    readonly title!: string
+
     isVisible: boolean = false
 
     show() {
@@ -35,5 +46,27 @@ export default class Modal extends Vue {
     background-color rgba(0, 0, 0, 0.4)
 
 .modal
+    display flex
+    flex-direction column
+    align-items stretch
     background-color white
+    min-width 50vw
+    min-height 50vh
+
+    .header
+        margin 0
+        padding 0.5em 1em
+        font-size 1.5em
+        background-color darkgray
+        color white
+
+    .content
+        flex-grow 1
+        margin 0 1em
+        padding 1em 0
+        border-bottom 0.5px solid
+    
+    .footer
+        align-self center
+        margin 1em
 </style>
