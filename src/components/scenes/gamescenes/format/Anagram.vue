@@ -1,23 +1,26 @@
 <template lang="pug">
 div: transition-group.chars(name="anagram" tag="div")
-    Animation(v-for="i in charIndice" :key="i" name="spin" :ref="i") {{ statement[i] }}
+    div(v-for="i in charIndice" :key="i")
+        SpinAnimation(:ref="i" :spin="spinParameter" :immidiate="!!spinParameter") {{ statement[i] }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator"
 import { mixins } from "vue-class-component"
-import Animation from "@/components/ui/Animation.vue"
+import SpinAnimation from "@/components/ui/SpinAnimation.vue"
 import { GameFormatMixin } from "@/scripts/mixins"
 import { iota, update } from "@/scripts/array-utils"
 import { randomIndex, fisherYateShuffleInPlace } from "@/scripts/random-utils"
 
 @Component({
-    components: { Animation }
+    components: { SpinAnimation }
 })
 export default class Anagram extends mixins(GameFormatMixin) {
     private statement: string = ""
     private charIndice: number[] = []
     private wrongIndice: [number, number][] = []  // [right possiton, current position]
+
+    readonly $refs!: {[n: number]: [SpinAnimation]}
 
     created() {
         this.statement = this.appState.currentQuiz.statement
@@ -33,9 +36,12 @@ export default class Anagram extends mixins(GameFormatMixin) {
 
         this.$on("expose", () => {
             this.charIndice = iota(this.statement.length)
+            for (let i = 0; i < this.charIndice.length ; i++) {
+                this.$refs[i][0].requestStopAnimationOnNextIteration()
+            }
         })
     }
-    
+
     private swap() {
         if (this.wrongIndice.length <= 0) return
 
@@ -59,6 +65,10 @@ export default class Anagram extends mixins(GameFormatMixin) {
         if (this.wrongIndice.length <= 0)
             this.expose()
     }
+
+    private get spinParameter(): SpinParameters | undefined {
+        return this.appState.currentQuiz.formatOption.spin
+    }
 }
 </script>
 
@@ -71,16 +81,4 @@ export default class Anagram extends mixins(GameFormatMixin) {
 
 .anagram-move
     transition transform 1s linear
-
-.spin-active
-    animation spin 2s infinite
-
-@keyframes spin {
-    from {
-        transform rotate(0deg)
-    }
-    to {
-        transform rotate(360deg)
-    }
-}
 </style>

@@ -2,6 +2,7 @@
 #startup
     h1#header TAQT: Text Animation Quiz Tool
     #body
+        Button(@click="loadSamples(); startGame(); appState.goNextStep(); appState.goNextStep(); appState.goNextStep();") DEBUG
         #loader
             .option: Dropbox
             #or または

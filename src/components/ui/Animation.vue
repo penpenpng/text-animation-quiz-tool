@@ -1,5 +1,9 @@
 <template lang="pug">
-div(:class="{[name + '-active']: isActive}" @animationend="stopAnimation" @animationiteration="onIteration"): slot
+div(
+    :style="styleVariables"
+    :class="{[name + '-active']: isActive}"
+    @animationend="stopAnimation"
+    @animationiteration="onIteration"): slot
 </template>
 
 <script lang="ts">
@@ -7,7 +11,7 @@ import { Component, Prop, Vue } from "vue-property-decorator"
 
 @Component
 export default class Animation extends Vue {
-    @Prop({type: String, required: true})
+    @Prop({type: String, default: "v"})
     readonly name!: string
 
     @Prop(Boolean)
@@ -26,6 +30,7 @@ export default class Animation extends Vue {
             return
 
         this.isActive = false
+        this.requestedStop = false
         requestAnimationFrame(() => {
             this.isActive = true
         })
@@ -45,6 +50,11 @@ export default class Animation extends Vue {
             this.stopAnimation()
         else
             this.startAnimation()
+    }
+
+    // only used in subclasses
+    protected get styleVariables(): object {
+        return {}
     }
 
     private onIteration() {

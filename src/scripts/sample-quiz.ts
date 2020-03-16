@@ -1,16 +1,26 @@
 const sampleQuiz: Quiz[] = [
     {
         format: "anagram",
+        formatOption: {
+            spin: {
+                secPerRound: 2,
+                secPerRoundEpsilon: 0,
+                direction: "right",
+                easeFunction: "linear",
+            }
+        },
         statement: "「なぜ山に登るのか」という質問に、「そこに山があるから」と答えたことでも知られる有名な登山家は誰でしょう？",
         answer: "ジョージ・マロリー"
     },
     {
         format: "anagram",
+        formatOption: {},
         statement: "「なぜ山に登るのか」という質問に、「そこに山があるから」と答えたことでも知られる有名な登山家は誰でしょう？",
         answer: "ジョージ・マロリー"
     },
     {
         format: "anagram",
+        formatOption: {},
         statement: "「なぜ山に登るのか」という質問に、「そこに山があるから」と答えたことでも知られる有名な登山家は誰でしょう？",
         answer: "ジョージ・マロリー"
     }
