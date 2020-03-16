@@ -6,11 +6,11 @@
             .option: Dropbox
             #or または
             .option: Button(@click="loadSamples") サンプル問題を読み込む
-        Fade: #after-loaded(v-show="appState.canStartGame")
-            Button(@click="showInspectorModal" secondary) 読み込んだ問題を確認する
-            Button(@click="showConfigModal" secondary) 表示設定を変更する
+        FadeTransition: #after-loaded(v-show="appState.canStartGame")
+            Button(@click="$refs.inspectorModal.show()" secondary) 読み込んだ問題を確認する
+            Button(@click="$refs.configModal.show()" secondary) 表示設定を変更する
             Button(@click="startGame") 出題画面へ
-            HelpButton.help(@click="showHelpModal") 出題画面の操作方法
+            HelpButton.help(@click="$refs.helpModal.show()") 出題画面の操作方法
     #footer
         a(target="_blank" rel="noopener" :href="repositoryUrl" ) Github
         a(target="_blank" rel="noopener" href="https://twitter.com/penpen_png") Twitter
@@ -30,10 +30,10 @@ import Config from "./startup/Config.vue"
 import Button from "@/components/ui/Button.vue"
 import HelpButton from "@/components/ui/HelpButton.vue"
 import Modal from "@/components/ui/Modal.vue"
-import Fade from "@/components/ui/Fade.vue"
+import FadeTransition from "@/components/ui/FadeTransition.vue"
 
 @Component({
-    components: { Dropbox, Config, Button, HelpButton, Modal, Fade },
+    components: { Dropbox, Config, Button, HelpButton, Modal, FadeTransition },
 })
 export default class Startup extends mixins(AppStateMixin) {
     readonly repositoryUrl: string = packageJson.repository.url
@@ -50,18 +50,6 @@ export default class Startup extends mixins(AppStateMixin) {
 
     loadSamples() {
         this.appState.loadSampleQuiz()
-    }
-
-    showConfigModal() {
-        this.$refs.configModal.show()
-    }
-
-    showInspectorModal() {
-        this.$refs.inspectorModal.show()
-    }
-
-    showHelpModal() {
-        this.$refs.helpModal.show()
     }
 }
 </script>

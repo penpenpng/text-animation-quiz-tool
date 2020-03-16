@@ -1,5 +1,5 @@
 <template lang="pug">
-Fade
+FadeTransition
     .background(v-if="isVisible" @click.self.stop="close")
         .modal
             h1.header {{ title }}
@@ -10,10 +10,10 @@ Fade
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator"
 import Button from "@/components/ui/Button.vue"
-import Fade from "@/components/ui/Fade.vue"
+import FadeTransition from "@/components/ui/FadeTransition.vue"
 
 @Component({
-    components: { Fade, Button }
+    components: { FadeTransition, Button }
 })
 export default class Modal extends Vue {
     @Prop(String)

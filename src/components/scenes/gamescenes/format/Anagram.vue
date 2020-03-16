@@ -66,5 +66,5 @@ export default class Anagram extends mixins(GameFormatMixin) {
     display inline-block
 
 .anagram-move
-    transition transform 1s
+    transition transform 1s linear
 </style>

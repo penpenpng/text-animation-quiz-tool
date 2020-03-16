@@ -6,7 +6,7 @@ transition(name="fade"): slot
 import { Component, Vue } from "vue-property-decorator"
 
 @Component
-export default class Fade extends Vue {}
+export default class FadeTransition extends Vue {}
 </script>
 
 <style scoped lang="stylus">
