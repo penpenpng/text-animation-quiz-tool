@@ -9,7 +9,7 @@ import { AppStateMixin } from "@/scripts/mixins"
 
 @Component
 export default class Number extends mixins(AppStateMixin) {
-    get styleObject() {
+    private get styleObject() {
         return {
             'font-size': `${this.appState.config.quizNumberFontSize}em`,
             'font-family': `'${this.appState.config.quizNumberFont}', monospace`,

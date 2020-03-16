@@ -9,7 +9,7 @@ import { AppStateMixin } from "@/scripts/mixins"
 
 @Component
 export default class Title extends mixins(AppStateMixin) {
-    get styleObject() {
+    private get styleObject() {
         return {
             cursor: this.appState.config.showMouseCursor ? "default" : "none",
             'font-size': `${this.appState.config.titleFontSize}em`,

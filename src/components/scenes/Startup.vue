@@ -36,19 +36,20 @@ import FadeTransition from "@/components/ui/FadeTransition.vue"
     components: { Dropbox, Config, Button, HelpButton, Modal, FadeTransition },
 })
 export default class Startup extends mixins(AppStateMixin) {
-    readonly repositoryUrl: string = packageJson.repository.url
+    private readonly repositoryUrl: string = packageJson.repository.url
     readonly $refs!: {
         inspectorModal: Modal,
         helpModal: Modal,
         configModal: Modal,
     }
-    quizIsLoaded: boolean = false
+    
+    private quizIsLoaded: boolean = false
 
-    startGame() {
+    private startGame() {
         this.appState.startGame()
     }
 
-    loadSamples() {
+    private loadSamples() {
         this.appState.loadSampleQuiz()
     }
 }

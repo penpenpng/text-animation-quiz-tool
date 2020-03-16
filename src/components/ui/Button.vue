@@ -14,7 +14,7 @@ export default class Button extends Vue {
     @Prop(Boolean)
     readonly secondary?: boolean
 
-onClick() {
+    private onClick() {
         if (!this.disable) this.$emit("click")
     }
 }

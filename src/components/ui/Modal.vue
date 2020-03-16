@@ -19,7 +19,7 @@ export default class Modal extends Vue {
     @Prop(String)
     readonly title!: string
 
-    isVisible: boolean = false
+    private isVisible: boolean = false
 
     show() {
         this.isVisible = true

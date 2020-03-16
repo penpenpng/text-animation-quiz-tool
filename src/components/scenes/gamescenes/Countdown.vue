@@ -30,7 +30,7 @@ export default class Countdown extends mixins(AppStateMixin) {
         }
     }
 
-    get styleObject() {
+    private get styleObject() {
         return {
             'font-size': `${this.appState.config.quizNumberFontSize}em`,
             'font-family': `'${this.appState.config.quizNumberFont}', monospace`,

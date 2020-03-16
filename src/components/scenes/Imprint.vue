@@ -9,7 +9,7 @@ import { AppStateMixin } from "@/scripts/mixins"
 
 @Component
 export default class Imprint extends mixins(AppStateMixin) {
-    get styleObject() {
+    private get styleObject() {
         return {
             cursor: this.appState.config.showMouseCursor ? "default" : "none"
         }

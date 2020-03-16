@@ -1,22 +1,24 @@
 <template lang="pug">
 div: transition-group.chars(name="anagram" tag="div")
-    span.char(v-for="i in charIndice" :key="i")
-        | {{ statement[i] }}
+    Animation(v-for="i in charIndice" :key="i" name="spin" :ref="i") {{ statement[i] }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator"
 import { mixins } from "vue-class-component"
+import Animation from "@/components/ui/Animation.vue"
 import { GameFormatMixin } from "@/scripts/mixins"
 import { iota, update } from "@/scripts/array-utils"
 import { randomIndex, fisherYateShuffleInPlace } from "@/scripts/random-utils"
 
-@Component
+@Component({
+    components: { Animation }
+})
 export default class Anagram extends mixins(GameFormatMixin) {
-    statement: string = ""
-    charIndice: number[] = []
-    wrongIndice: [number, number][] = []  // [right possiton, current position]
-    
+    private statement: string = ""
+    private charIndice: number[] = []
+    private wrongIndice: [number, number][] = []  // [right possiton, current position]
+
     created() {
         this.statement = this.appState.currentQuiz.statement
         this.charIndice = (() => {
@@ -25,14 +27,16 @@ export default class Anagram extends mixins(GameFormatMixin) {
             return indices
         })()
 
-        this.$on("click", () => this.swap())
+        this.$on("click", () => {
+            this.swap()
+        })
 
         this.$on("expose", () => {
             this.charIndice = iota(this.statement.length)
         })
     }
     
-    swap() {
+    private swap() {
         if (this.wrongIndice.length <= 0) return
 
         const i = randomIndex(this.wrongIndice.length)
@@ -44,7 +48,7 @@ export default class Anagram extends mixins(GameFormatMixin) {
     }
 
     @Watch("charIndice")
-    updateWrongIndice() {
+    private updateWrongIndice() {
         const wrongIndice: [number, number][] = []
         for (let i = 0; i < this.charIndice.length; i++)
             if (this.charIndice[i] !== i)
@@ -61,10 +65,22 @@ export default class Anagram extends mixins(GameFormatMixin) {
 <style scoped lang="stylus">
 .chars
     max-width 80%
-
-.char
-    display inline-block
+    display flex
+    flex-direction row
+    flex-wrap wrap
 
 .anagram-move
     transition transform 1s linear
+
+.spin-active
+    animation spin 2s infinite
+
+@keyframes spin {
+    from {
+        transform rotate(0deg)
+    }
+    to {
+        transform rotate(360deg)
+    }
+}
 </style>

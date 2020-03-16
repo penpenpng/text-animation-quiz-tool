@@ -1,5 +1,5 @@
 <template lang="pug">
-div(:class="{[name + '-isActive']: isActive}" @animationend="stopAnimation"): slot
+div(:class="{[name + '-active']: isActive}" @animationend="stopAnimation" @animationiteration="onIteration"): slot
 </template>
 
 <script lang="ts">
@@ -10,9 +10,21 @@ export default class Animation extends Vue {
     @Prop({type: String, required: true})
     readonly name!: string
 
-    isActive: boolean = false
+    @Prop(Boolean)
+    readonly immidiate?: boolean
 
-    startAnimation() {
+    private isActive: boolean = false
+    private requestedStop: boolean = false
+
+    created() {
+        if (this.immidiate)
+            this.startAnimation()
+    }
+
+    startAnimation(forceRestart?: boolean) {
+        if (this.isActive && !forceRestart)
+            return
+
         this.isActive = false
         requestAnimationFrame(() => {
             this.isActive = true
@@ -21,6 +33,11 @@ export default class Animation extends Vue {
 
     stopAnimation() {
         this.isActive = false
+        this.requestedStop = false
+    }
+
+    requestStopAnimationOnNextIteration() {
+        this.requestedStop = true
     }
 
     toggleAnimation() {
@@ -28,6 +45,11 @@ export default class Animation extends Vue {
             this.stopAnimation()
         else
             this.startAnimation()
+    }
+
+    private onIteration() {
+        if (this.requestedStop)
+            this.stopAnimation()
     }
 }
 </script>

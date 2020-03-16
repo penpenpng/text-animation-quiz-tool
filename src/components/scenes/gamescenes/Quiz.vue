@@ -17,11 +17,11 @@ export default class Quiz extends mixins(AppStateMixin) {
         quizDisplay: Vue,
     }
 
-    get format(): string {
+    private get format(): string {
         return capitalize(this.appState.currentQuiz.format)
     }
 
-    get styleObject() {
+    private get styleObject() {
         return {
             'font-size': `${this.appState.config.quizBodyFontSize}em`,
             'font-family': `'${this.appState.config.quizBodyFont}', monospace`,
@@ -29,12 +29,12 @@ export default class Quiz extends mixins(AppStateMixin) {
     }
 
     @Watch("appState.gameScene")
-    onChangeGameScene(scene: GameScene) {
+    private onChangeGameScene(scene: GameScene) {
         if (scene === "exposure")
             this.$refs.quizDisplay.$emit("expose")
     }
 
-    onClick() {
+    private onClick() {
         this.$refs.quizDisplay.$emit("click")
     }
 }

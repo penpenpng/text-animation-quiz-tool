@@ -8,7 +8,7 @@ import { Component, Vue } from "vue-property-decorator"
 
 @Component
 export default class HelpButton extends Vue {
-    onClick() {
+    private onClick() {
         this.$emit("click")
     }
 }

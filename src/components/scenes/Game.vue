@@ -17,7 +17,7 @@ import { ThrowDirtyStateError } from "@/scripts/errors"
     components: { Number, Countdown, Quiz, Answer }
 })
 export default class Game extends mixins(AppStateMixin) {
-    get gameScene(): string {
+    private get gameScene(): string {
         if (this.appState.gameScene === null)
             ThrowDirtyStateError()
 
@@ -27,7 +27,7 @@ export default class Game extends mixins(AppStateMixin) {
         return capitalize(this.appState.gameScene)
     }
 
-    get styleObject() {
+    private get styleObject() {
         return {
             cursor: this.appState.config.showMouseCursor ? "default" : "none"
         }
