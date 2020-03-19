@@ -11,4 +11,12 @@ export class GameFormatMixin extends AppStateMixin {
     expose() {
         this.appState.gameScene = "exposure"
     }
+
+    get isExposureScene(): boolean {
+        return this.appState.gameScene === "exposure"
+    }
+
+    get formatOption(): QuizFormatOption {
+        return this.appState.currentQuiz.formatOption
+    }
 }

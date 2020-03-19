@@ -1,19 +1,21 @@
 <template lang="pug">
-div: transition-group.chars(name="anagram" tag="div")
-    div(v-for="i in charIndice" :key="i")
-        SpinAnimation(:ref="i" :spin="spinParameter" :immidiate="!!spinParameter") {{ statement[i] }}
+SearchLight(:disable="!formatOption.searchLight" :discovered="isExposureScene")
+    transition-group.chars(name="anagram" tag="div")
+        div(v-for="i in charIndice" :key="i")
+            SpinAnimation(:ref="i" :spin="formatOption.spin" :immidiate="!!formatOption.spin") {{ statement[i] }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator"
 import { mixins } from "vue-class-component"
 import SpinAnimation from "@/components/ui/SpinAnimation.vue"
+import SearchLight from "@/components/ui/SearchLight.vue"
 import { GameFormatMixin } from "@/scripts/mixins"
 import { iota, update } from "@/scripts/array-utils"
 import { randomIndex, fisherYateShuffleInPlace } from "@/scripts/random-utils"
 
 @Component({
-    components: { SpinAnimation }
+    components: { SpinAnimation, SearchLight }
 })
 export default class Anagram extends mixins(GameFormatMixin) {
     private statement: string = ""
@@ -64,10 +66,6 @@ export default class Anagram extends mixins(GameFormatMixin) {
 
         if (this.wrongIndice.length <= 0)
             this.expose()
-    }
-
-    private get spinParameter(): SpinParameters | undefined {
-        return this.appState.currentQuiz.formatOption.spin
     }
 }
 </script>

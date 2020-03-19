@@ -20,7 +20,7 @@ export default class SpinAnimation extends Animation {
                 const e = this.spin.secPerRoundEpsilon
                 const t = s - e + Math.random() * 2 * e
 
-                return `${t}s`
+                return `${Math.max(t, 0.5)}s`
             })(),
             "--direction": (() => {
                 if (!this.spin) return "normal"
