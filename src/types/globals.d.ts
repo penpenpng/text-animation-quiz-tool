@@ -1,4 +1,4 @@
-type QuizFormat = "anagram"
+type QuizFormat = "anagram" | "blink"
 type AppScene = "startup" | "title" | "game" | "imprint"
 type GameScene = "number" | "countdown" | "quiz" | "exposure" | "answer" | null
 

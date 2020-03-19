@@ -2,15 +2,15 @@
 SearchLight(:disable="!formatOption.searchLight" :discovered="isExposureScene")
     transition-group.chars(name="anagram" tag="div")
         div(v-for="i in charIndice" :key="i")
-            SpinAnimation(:ref="i" :spin="formatOption.spin" :immidiate="!!formatOption.spin") {{ statement[i] }}
+            SpinAnimation(ref="statement" :spin="formatOption.spin" :immidiate="!!formatOption.spin") {{ statement[i] }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator"
 import { mixins } from "vue-class-component"
+import { GameFormatMixin } from "@/scripts/mixins"
 import SpinAnimation from "@/components/ui/SpinAnimation.vue"
 import SearchLight from "@/components/ui/SearchLight.vue"
-import { GameFormatMixin } from "@/scripts/mixins"
 import { iota, update } from "@/scripts/array-utils"
 import { randomIndex, fisherYateShuffleInPlace } from "@/scripts/random-utils"
 
@@ -22,9 +22,9 @@ export default class Anagram extends mixins(GameFormatMixin) {
     private charIndice: number[] = []
     private wrongIndice: [number, number][] = []  // [right possiton, current position]
 
-    readonly $refs!: {[n: number]: [SpinAnimation]}
+    readonly $refs!: {statement: SpinAnimation[]}
 
-    created() {
+    private created() {
         this.statement = this.appState.currentQuiz.statement
         this.charIndice = (() => {
             const indices: number[] = iota(this.statement.length)
@@ -37,10 +37,10 @@ export default class Anagram extends mixins(GameFormatMixin) {
         })
 
         this.$on("expose", () => {
+            console.log(this.$refs)
             this.charIndice = iota(this.statement.length)
-            for (let i = 0; i < this.charIndice.length ; i++) {
-                this.$refs[i][0].requestStopAnimationOnNextIteration()
-            }
+            for (let c of this.$refs.statement)
+                c.requestStopAnimationOnNextIteration()
         })
     }
 

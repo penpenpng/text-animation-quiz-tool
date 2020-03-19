@@ -1,8 +1,8 @@
 const sampleQuiz: Quiz[] = [
     {
-        format: "anagram",
+        format: "blink",
         formatOption: {
-            searchLight: true,
+            // searchLight: true,
         },
         statement: "「なぜ山に登るのか」という質問に、「そこに山があるから」と答えたことでも知られる有名な登山家は誰でしょう？",
         answer: "ジョージ・マロリー"
@@ -16,7 +16,7 @@ const sampleQuiz: Quiz[] = [
                 direction: "right",
                 easeFunction: "linear",
             },
-            searchLight: true,
+            // searchLight: true,
         },
         statement: "「なぜ山に登るのか」という質問に、「そこに山があるから」と答えたことでも知られる有名な登山家は誰でしょう？",
         answer: "ジョージ・マロリー"

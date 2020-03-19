@@ -1,8 +1,8 @@
 <template lang="pug">
 .dropbox
     .dropbox-label ここに CSV をドラッグアンドドロップ
-    HelpButton(@click="showCsvFormatHelpModal") CSV のフォーマット
-    HelpButton(@click="showCsvSampleHelpModal") CSV のサンプル
+    HelpButton(@click="$refs.csvFormatHelpModal.show()") CSV のフォーマット
+    HelpButton(@click="$refs.csvSampleHelpModal.show()") CSV のサンプル
 
     Modal(ref="csvFormatHelpModal") csv format
     Modal(ref="csvSampleHelpModal") csv sample
@@ -22,14 +22,6 @@ export default class Dropbox extends mixins(AppStateMixin) {
     readonly $refs!: {
         csvFormatHelpModal: Modal,
         csvSampleHelpModal: Modal,
-    }
-
-    showCsvFormatHelpModal() {
-        this.$refs.csvFormatHelpModal.show()
-    }
-
-    showCsvSampleHelpModal() {
-        this.$refs.csvSampleHelpModal.show()
     }
 }
 </script>

@@ -1,17 +1,26 @@
 <template lang="pug">
-transition(name="fade"): slot
+transition(name="fade" :style="styleVariables"): slot
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Prop, Vue } from "vue-property-decorator"
 
 @Component
-export default class FadeTransition extends Vue {}
+export default class FadeTransition extends Vue {
+    @Prop({type: Number, default: 0.5})
+    readonly duration: number = 0.5
+
+    private get styleVariables() {
+        return {
+            "--duration": this.duration
+        }
+    }
+}
 </script>
 
 <style scoped lang="stylus">
 .fade-enter-active, .fade-leave-active
-    transition opacity .5s
+    transition opacity var(--duration)s
 
 .fade-enter, .fade-leave-to
     opacity 0

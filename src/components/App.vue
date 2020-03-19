@@ -16,7 +16,7 @@ import { capitalize } from "@/scripts/string-utils"
     components: { Startup, Title, Game, Imprint},
 })
 export default class App extends mixins(AppStateMixin) {
-    created() {
+    private created() {
         document.addEventListener("keydown", ev => {
             if (this.appState.appScene === "startup")
                 return
@@ -47,7 +47,7 @@ export default class App extends mixins(AppStateMixin) {
         })
     }
 
-    get scene(): string {
+    private get scene(): string {
         return capitalize(this.appState.appScene)
     }
 }

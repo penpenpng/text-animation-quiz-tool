@@ -20,7 +20,7 @@ export default class Animation extends Vue {
     private isActive: boolean = false
     private requestedStop: boolean = false
 
-    created() {
+    private created() {
         if (this.immidiate)
             this.startAnimation()
     }

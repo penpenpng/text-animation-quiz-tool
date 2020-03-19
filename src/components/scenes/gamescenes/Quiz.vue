@@ -7,10 +7,11 @@ import { Component, Vue, Watch } from "vue-property-decorator"
 import { mixins } from "vue-class-component"
 import { AppStateMixin } from "@/scripts/mixins"
 import Anagram from "./format/Anagram.vue"
+import Blink from "./format/Blink.vue"
 import { capitalize } from "@/scripts/string-utils"
 
 @Component({
-    components: { Anagram }
+    components: { Anagram, Blink }
 })
 export default class Quiz extends mixins(AppStateMixin) {
     readonly $refs!: {
